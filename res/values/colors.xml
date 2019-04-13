@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorAccent">#536DFE</color>
+    <color name="tooglemenu">#FFffffff</color>
+    <color name="greenBackGround">#4CAF50</color>
+    <color name="mainLayout_backGround">#e0e0e0</color>
+</resources>

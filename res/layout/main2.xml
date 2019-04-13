@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity">
+
+  <include layout="@layout/toolbar"
+
+      ></include>
+
+  <FrameLayout
+      android:layout_marginTop="?attr/actionBarSize"
+      android:id="@+id/main2_frag_holder"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+  </FrameLayout>
+
+  <TextView
+      android:id="@+id/main2_login_btn"
+      android:text="ثبت نام در دیجی شاپ "
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+</LinearLayout>

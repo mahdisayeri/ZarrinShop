@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".Register">
+
+
+    <TextView
+
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="اگر قبلا با ایمیل ثبت نام کرده اید. نیاز به ثبت نام مجددباشماره همراه ندارید" />
+
+
+    <EditText
+        android:drawableRight="@drawable/ic_email_black_24dp"
+        android:id="@+id/reg_username"
+        android:textSize="14sp"
+        android:inputType="textWebEmailAddress"
+        android:drawablePadding="15dp"
+        android:layout_marginTop="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="شماره موبایل یا ایمیل" />
+
+    <EditText
+        android:textSize="14sp"
+        android:inputType="text"
+        android:drawablePadding="15dp"
+        android:drawableRight="@drawable/ic_lock_black_24dp"
+        android:id="@+id/reg_password"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="کلمه عبور" />
+
+    <CheckBox
+        android:textSize="12sp"
+        android:checked="true"
+        android:id="@+id/checkBox2"
+        android:layout_marginTop="20dp"
+        android:layoutDirection="rtl"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="مایل به دریافت خبر نامه دیجی شاپ هستم" />
+
+    <Button
+        android:id="@+id/reg_register_btn"
+        android:layout_marginTop="15dp"
+        android:text=" ثبت نام در دیجی شاپ"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

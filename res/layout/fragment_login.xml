@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".Login">
+
+
+    <EditText
+
+        android:drawableRight="@drawable/ic_email_black_24dp"
+        android:drawablePadding="15dp"
+        android:textSize="14sp"
+        android:id="@+id/log_username"
+        android:layout_marginTop="30dp"
+        android:hint="شماره موبایل یا ایمیل"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:textSize="14sp"
+        android:drawableRight="@drawable/ic_lock_black_24dp"
+        android:drawablePadding="15dp"
+        android:id="@+id/log_password"
+        android:layout_marginTop="20dp"
+        android:hint="کلمه عبور"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <CheckBox
+        android:textSize="11sp"
+        android:id="@+id/log_checkBox"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layoutDirection="rtl"
+        android:text="نمایش کلمه عبور" />
+
+    <Button
+        android:textSize="14sp"
+        android:id="@+id/log_login_btn"
+        android:text="ورود"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:textSize="12sp"
+        android:id="@+id/log_forget_pass"
+        android:text="کلمه عبور را فراموش کرده ام!"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+</LinearLayout>
