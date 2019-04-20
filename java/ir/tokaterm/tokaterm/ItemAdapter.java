@@ -1,5 +1,6 @@
 package ir.tokaterm.tokaterm;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,7 +41,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         myViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(myContext, "item" + i, Toast.LENGTH_LONG).show();
+              //  Toast.makeText(myContext, "item" + i, Toast.LENGTH_LONG).show();
+                Intent product=new Intent(myContext,ProductCategoryList.class);
+                myContext.startActivity(product);
+
+
             }
         });
 

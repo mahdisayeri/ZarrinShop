@@ -6,6 +6,7 @@
 
                 <item android:title="@string/home" android:id="@+id/nav_home"
                     android:icon="@drawable/ic_home_black_24dp"></item>
+
                 <item android:title="@string/ProductCategoryList" android:id="@+id/nav_productList"
                     android:icon="@drawable/ic_list_black_24dp" ></item>
 

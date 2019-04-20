@@ -45,13 +45,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
    SliderLayout sliderLayout;
 
-    RecyclerView recyclerView,wonderRecycler;
+    RecyclerView recyclerView,wonderRecycler,product_cat_list_recycler;
 
 
     List<Data_Model> itemList=new ArrayList<>();
     ItemAdapter madapter;
     List<Data_Model_wonderful_list> itemListwonder=new ArrayList<>();
     ItemAdapter_wonderful_list wonderAdapter;
+
+    List<Data_Mode_product_cat_list> itemlist_product_cat_list=new ArrayList<>();
+    Item_Adapter_product_cat_list product_cat_list_Adapter;
 
     private CountDownTimer countDownTimer;
     private TextView cdtTV;
@@ -151,9 +154,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         wonderRecycler.setHasFixedSize(true);
         wonderRecycler.setAdapter(wonderAdapter);
         setDataWonderful();
-
-
     }
+
 
     private void setSliderViews(){
 
@@ -181,7 +183,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
               @Override
               public void onSliderClick(SliderView sliderView) {
-                  Toast.makeText(MainActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(MainActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                  Intent ni=new Intent(MainActivity.this,ProductCategoryList.class);
+                  startActivity(ni);
               }
           });
           //at last add this view in your layout :
@@ -295,7 +299,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
               //  Toast.makeText(this, "Home", Toast.LENGTH_LONG).show();
             break;
             case R.id.nav_productList:
-                Toast.makeText(this, "ProductList", Toast.LENGTH_LONG).show();
+               // Intent product=new Intent(MainActivity.this,ProductCategoryList.class);
+               // startActivity(product);
+               Toast.makeText(this, "ProductList", Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_basket:
                 Toast.makeText(this, "Basket", Toast.LENGTH_LONG).show();

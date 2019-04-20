@@ -11,7 +11,7 @@
 
     <TextView
 
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="اگر قبلا با ایمیل ثبت نام کرده اید. نیاز به ثبت نام مجددباشماره همراه ندارید" />
