@@ -8,16 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
+public class ItemAdapter_category extends RecyclerView.Adapter<ItemAdapter_category.MyViewHolder> {
 
-    List<Data_Model> itemList;
+    List<Data_Model_category> itemList;
     Context myContext;
 
-    public ItemAdapter(List<Data_Model> itemList, Context myContext) {
+    public ItemAdapter_category(List<Data_Model_category> itemList, Context myContext) {
         this.itemList = itemList;
         this.myContext = myContext;
     }
@@ -25,7 +24,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View aView= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list1,viewGroup,false);
+        View aView= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_category,viewGroup,false);
 
         return new MyViewHolder(aView);
     }
@@ -33,10 +32,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
 
-        Data_Model item=itemList.get(i);
+        Data_Model_category item=itemList.get(i);
 
 
-        myViewHolder.titleList1.setText(item.getTitlelist());
+        myViewHolder.titleList.setText(item.getTitlelist());
 
         myViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,14 +58,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView titleList1;
+        public TextView titleList;
         public LinearLayout linearLayout;
 
         public MyViewHolder( View itemView) {
             super(itemView);
 
-            titleList1=itemView.findViewById(R.id.tv_titleList1);
-            linearLayout=itemView.findViewById(R.id.row_item_list);
+            titleList=itemView.findViewById(R.id.item_list_category_textView);
+            linearLayout=itemView.findViewById(R.id.item_list_category_linearLayout);
         }
     }
 

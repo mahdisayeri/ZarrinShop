@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Api {
 
-    public static final String BASE_URL="http://www.tokaterm.ir/files/api/";
+    public static final String BASE_URL="http://www.tokaterm.ir/files/zarrinshopapi/";
     public static Retrofit myretrofit=null;
 
     public static Retrofit getApi(){

@@ -1,12 +1,9 @@
 package ir.tokaterm.tokaterm;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,13 +13,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,8 +27,13 @@ import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -48,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView recyclerView,wonderRecycler,product_cat_list_recycler;
 
 
-    List<Data_Model> itemList=new ArrayList<>();
-    ItemAdapter madapter;
+    List<Data_Model_category> itemList=new ArrayList<>();
+    ItemAdapter_category madapter;
     List<Data_Model_wonderful_list> itemListwonder=new ArrayList<>();
     ItemAdapter_wonderful_list wonderAdapter;
 
@@ -59,11 +57,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private CountDownTimer countDownTimer;
     private TextView cdtTV;
 
+    public static ApiInterface apiInterface;
+
+    private ArrayList<Product> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        apiInterface=Api.getApi().create(ApiInterface.class);
+
+
         //START*************************COUNT DOWN TIMER********************
 
         cdtTV=findViewById(R.id.countdowntv);
@@ -125,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 drawerLayout.closeDrawer(GravityCompat.START);
-               Intent main2=new Intent(MainActivity.this,Main2.class);
+               Intent main2=new Intent(MainActivity.this, Main_log_regActivity.class);
                 startActivity(main2);
             }
         });
@@ -137,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //**************************************
         recyclerView=findViewById(R.id.first_layout_recyclerView1);
-        madapter=new ItemAdapter(itemList,this);
+        madapter=new ItemAdapter_category(itemList,this);
         RecyclerView.LayoutManager mlayoutmanager=new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(mlayoutmanager);
@@ -199,67 +204,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setDataWonderful(){
 
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg1 ,"حلقه طلا فلاور کد :37742",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg2,"حلقه طلا فلاور کد :37743",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg3,"حلقه طلا فلاور کد :37744",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg4,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg5,"حلقه طلا فلاور کد :37742",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg6,"حلقه طلا فلاور کد :37743",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg7,"حلقه طلا فلاور کد :37744",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg8,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg9,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg10,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg11,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg1 ,"حلقه طلا فلاور کد :37742",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg2,"حلقه طلا فلاور کد :37743",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg3,"حلقه طلا فلاور کد :37744",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg4,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg5,"حلقه طلا فلاور کد :37742",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg6,"حلقه طلا فلاور کد :37743",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg7,"حلقه طلا فلاور کد :37744",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg8,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg9,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg10,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
-        itemListwonder.add(new Data_Model_wonderful_list(R.drawable.dg11,"حلقه طلا فلاور کد :37745",
-                "2,389,000 تومان","2,186,000 تومان"));
+        String imageUrl;
+        final String[] title = new String[1];
+        String price;
 
-        wonderAdapter.notifyDataSetChanged();
+       Call<JSONResponse> callProduct=apiInterface.wonderfulListCall("true");
+
+       callProduct.enqueue(new Callback<JSONResponse>() {
+                               @Override
+                               public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
+
+                             JSONResponse jsonResponse=response.body();
+                            data=new ArrayList<>(Arrays.asList(jsonResponse.getObj1()));
+                                   for(int i=0;i<data.size();i++){
+                                       itemListwonder.add(new Data_Model_wonderful_list(data.get(i).getApiImageUrl(),
+                                             data.get(i).getApiTitle(),data.get(i).getApiOffPercentage(),data.get(i).getApiprice()));
+
+
+                                   }
+
+                                   wonderAdapter.notifyDataSetChanged();
+                               }
+
+                               @Override
+                               public void onFailure(Call<JSONResponse> call, Throwable t) {
+                                   Toast.makeText(MainActivity.this,"error", Toast.LENGTH_SHORT).show();
+
+                               }
+                           });
+
     }
 
     private void setData(){
 
-        itemList.add(new Data_Model("دستبند طلا"));
-        itemList.add(new Data_Model("گوشواره طلا"));
-        itemList.add(new Data_Model("سرویس طلا"));
-        itemList.add(new Data_Model("نیم ست طلا"));
-        itemList.add(new Data_Model("انگشتر طلا"));
-        itemList.add(new Data_Model("گردنبند طلا"));
-        itemList.add(new Data_Model("‍‍پابند طلا"));
-        itemList.add(new Data_Model("حلقه طلا"));
-        itemList.add(new Data_Model("تک دست والنگوطلا"));
-        itemList.add(new Data_Model("ساعت و آویز طلا"));
-        itemList.add(new Data_Model("مدال و پلاک طلا"));
+        itemList.add(new Data_Model_category("دستبند طلا"));
+        itemList.add(new Data_Model_category("گوشواره طلا"));
+        itemList.add(new Data_Model_category("سرویس طلا"));
+        itemList.add(new Data_Model_category("نیم ست طلا"));
+        itemList.add(new Data_Model_category("انگشتر طلا"));
+        itemList.add(new Data_Model_category("گردنبند طلا"));
+        itemList.add(new Data_Model_category("‍‍پابند طلا"));
+        itemList.add(new Data_Model_category("حلقه طلا"));
+        itemList.add(new Data_Model_category("تک دست والنگوطلا"));
+        itemList.add(new Data_Model_category("ساعت و آویز طلا"));
+        itemList.add(new Data_Model_category("مدال و پلاک طلا"));
         madapter.notifyDataSetChanged();
     }
 

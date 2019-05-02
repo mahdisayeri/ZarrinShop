@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -55,7 +54,7 @@ public class Login extends Fragment {
 
         String luser=user.getText().toString();
         String lpass=pass.getText().toString();
-        Call<User> calluser=Main2.apiInterface.logincall(luser,lpass);
+        Call<User> calluser= Main_log_regActivity.apiInterface.logincall(luser,lpass);
        // Toast.makeText(getActivity(), luser+"   " +lpass, Toast.LENGTH_LONG).show();
 
         calluser.enqueue(new Callback<User>() {

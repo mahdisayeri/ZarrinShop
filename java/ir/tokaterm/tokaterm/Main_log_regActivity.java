@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Main2 extends AppCompatActivity {
+public class Main_log_regActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView reg_tv;

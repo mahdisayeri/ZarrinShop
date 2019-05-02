@@ -53,7 +53,7 @@ public class Register extends Fragment {
     String user_t=user_et.getText().toString();
     String pass_t=pass_et.getText().toString();
 
-        Call<User> userCall=Main2.apiInterface.regcall(user_t,pass_t);
+        Call<User> userCall= Main_log_regActivity.apiInterface.regcall(user_t,pass_t);
 
         userCall.enqueue(new Callback<User>() {
             @Override

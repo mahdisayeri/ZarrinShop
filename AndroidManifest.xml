@@ -14,7 +14,7 @@
         <activity android:name=".FinalProduct"></activity>
         <activity android:name=".ProductCategoryList" />
         <activity
-            android:name=".Main2"
+            android:name=".Main_log_regActivity"
             android:label=" ورود و ثبت نام" />
         <activity android:name=".MainActivity">
             <intent-filter>

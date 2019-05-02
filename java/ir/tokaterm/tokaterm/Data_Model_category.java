@@ -1,10 +1,10 @@
 package ir.tokaterm.tokaterm;
 
-public class Data_Model {
+public class Data_Model_category {
 
     private String titlelist;
 
-    public Data_Model( String titlelist) {
+    public Data_Model_category(String titlelist) {
         this.titlelist = titlelist;
     }
 

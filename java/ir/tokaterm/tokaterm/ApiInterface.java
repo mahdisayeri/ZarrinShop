@@ -1,5 +1,7 @@
 package ir.tokaterm.tokaterm;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -13,5 +15,8 @@ public interface ApiInterface {
 
     @POST("login.php")
     Call<User> logincall(@Query("username") String UserName,@Query("password") String Password);
+
+    @GET("wonderfulList.php")
+    Call<JSONResponse> wonderfulListCall(@Query("wonderfulList") String wonderfulList);
 
 }
