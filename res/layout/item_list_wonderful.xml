@@ -3,35 +3,40 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginLeft="8dp"
+    android:layout_width="150dp"
+    android:layout_height="260dp"
+    android:layout_gravity="center_horizontal|center_vertical"
+
+    android:layout_marginRight="8dp"
     android:id="@+id/item_list_wonderfull_cardview"
     android:layout_marginBottom="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
 
     <LinearLayout
+
         android:id="@+id/item_list_wonder_linearLayout"
-        android:layout_width="150dp"
-        android:layout_height="270dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp">
 
         <ImageView
             android:id="@+id/item_list_wonder_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/a1" />
 
         <TextView
             android:id="@+id/item_list_wonder_nameTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
             android:layout_gravity="right"
+            android:padding="3dp"
             android:text="انگشتر طلا فلاور جیکس ویمن مدل RSV003" />
 
         <TextView
@@ -41,6 +46,7 @@
 
 
         <LinearLayout
+            android:layoutDirection="ltr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
