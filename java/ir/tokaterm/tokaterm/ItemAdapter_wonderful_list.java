@@ -40,22 +40,23 @@ public class ItemAdapter_wonderful_list extends
     @Override
     public void onBindViewHolder(@NonNull myViewHolder_wonderful myViewHolder_wonderful, final int i) {
 
-        Data_Model_wonderful_list item=itemList.get(i);
+        final Data_Model_wonderful_list item=itemList.get(i);
 
         String url=item.getImage();
         Glide.with(myContext).load(url).centerCrop().placeholder(R.drawable.a1).into(myViewHolder_wonderful.image);
 
-       // myViewHolder_wonderful.image.setImageResource(item.getImage());
         myViewHolder_wonderful.nameTitle.setText(item.getNameTitle());
-        myViewHolder_wonderful.oldprice.setText(item.getOldPrice());
+        myViewHolder_wonderful.oldprice.setText(item.getOffPercentage()+"تومان ");
         myViewHolder_wonderful.oldprice. setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        myViewHolder_wonderful.newPrice.setText(item.getNewPrice());
+        myViewHolder_wonderful.newPrice.setText(newPrice(item.getOffPercentage(),item.getPrice()));
 
         myViewHolder_wonderful.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Toast.makeText(myContext, "item"+i, Toast.LENGTH_SHORT).show();
+
                 Intent fp=new Intent(myContext,FinalProduct.class);
+                fp.putExtra("title",item.getNameTitle());
+                fp.putExtra("oldPrice",item.getPrice());
                 myContext.startActivity(fp);
             }
         });
@@ -88,6 +89,14 @@ public class ItemAdapter_wonderful_list extends
             cardView=itemView.findViewById(R.id.item_list_wonderfull_cardview);
 
         }
+    }
+
+    private String newPrice(String Price,String OffPer){
+        int price=Integer.parseInt(Price);
+        int offPer=Integer.parseInt(OffPer);
+      int newPrice=price-((price*offPer)/100);
+
+        return String.format("%,d",newPrice)+"تومان ";
     }
 
 }

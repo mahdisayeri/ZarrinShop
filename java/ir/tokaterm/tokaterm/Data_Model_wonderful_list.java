@@ -4,14 +4,14 @@ public class Data_Model_wonderful_list {
 
     private String image;
     private String nameTitle;
-    private String oldPrice ;
-    private String newPrice;
+    private String Price ;
+    private String OffPercentage;
 
-    public Data_Model_wonderful_list(String image, String nameTitle, String oldPrice, String newPrice) {
+    public Data_Model_wonderful_list(String image, String nameTitle, String Price, String OffPercentage) {
         this.image = image;
         this.nameTitle = nameTitle;
-        this.oldPrice = oldPrice;
-        this.newPrice = newPrice;
+        this.Price = Price;
+        this.OffPercentage = OffPercentage;
     }
 
     public String getImage() {
@@ -30,19 +30,19 @@ public class Data_Model_wonderful_list {
         this.nameTitle = nameTitle;
     }
 
-    public String getOldPrice() {
-        return oldPrice;
+    public String getPrice() {
+        return Price;
     }
 
-    public void setOldPrice(String oldPrice) {
-        this.oldPrice = oldPrice;
+    public void setPrice(String price) {
+        Price = price;
     }
 
-    public String getNewPrice() {
-        return newPrice;
+    public String getOffPercentage() {
+        return OffPercentage;
     }
 
-    public void setNewPrice(String newPrice) {
-        this.newPrice = newPrice;
+    public void setOffPercentage(String offPercentage) {
+        OffPercentage = offPercentage;
     }
 }

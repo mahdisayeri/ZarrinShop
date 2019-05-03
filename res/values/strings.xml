@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DigiShop</string>
+    <string name="app_name">ZarrinShop</string>
     <string name="home">"خانه"</string>
     <string name="ProductCategoryList">" لیست دسته بندی محصولات "</string>
     <string name="Cart">" سبد خرید "</string>
@@ -18,4 +18,5 @@
     <string name="connectivity_faild">خطا در اتصال به اینترنت !</string>
     <string name="Checkـnetworkـsettings">بررسی تنظیمات شبکه</string>
     <string name="retry_connected">تلاش مجدد</string>
+    <string name="describApp">بررسیءانتخاب و خرید آنلاین</string>
 </resources>
