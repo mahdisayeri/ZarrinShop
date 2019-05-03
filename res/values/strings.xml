@@ -15,4 +15,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="connectivity_faild">خطا در اتصال به اینترنت !</string>
+    <string name="Checkـnetworkـsettings">بررسی تنظیمات شبکه</string>
+    <string name="retry_connected">تلاش مجدد</string>
 </resources>

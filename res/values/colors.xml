@@ -6,4 +6,5 @@
     <color name="tooglemenu">#FFffffff</color>
     <color name="greenBackGround">#4CAF50</color>
     <color name="mainLayout_backGround">#e0e0e0</color>
+    <color name="black">#FF000000</color>
 </resources>
