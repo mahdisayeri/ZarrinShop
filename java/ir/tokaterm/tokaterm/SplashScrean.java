@@ -21,18 +21,20 @@ public class SplashScrean extends AppCompatActivity {
         cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()== NetworkInfo.State.CONNECTED ){
 
             connectd=true;
-
+            ProgressFragment pf=new ProgressFragment();
+            FragmentManager fm=getSupportFragmentManager();
+            FragmentTransaction ft=fm.beginTransaction();
+            ft.replace(R.id.splash_frag_Holder,pf);
+            ft.commit();
 
         }else{
+
             connectd=false;
             Ofline_Fragment of=new Ofline_Fragment();
             FragmentManager fm=getSupportFragmentManager();
             FragmentTransaction ft=fm.beginTransaction();
             ft.replace(R.id.splash_frag_Holder,of);
             ft.commit();
-
         }
-
-
     }
 }
