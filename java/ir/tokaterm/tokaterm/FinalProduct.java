@@ -35,14 +35,20 @@ public class FinalProduct extends AppCompatActivity {
 
         sliderLayout.setIndicatorAnimation(IndicatorAnimations.SWAP);
         sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
-        sliderLayout.setScrollTimeInSec(5);
+        //sliderLayout.setScrollTimeInSec(5);
         setSliderViews();
     }
 
     private void setdata(){
 
-        mainTitle.setText("دستبند طلا 18 عیار زنانه ریسه گالری");
-        subTitle.setText("مدل Ri3-S1088-Gold");
+        String title=getIntent().getExtras().getString("title");
+        String oldPrice=getIntent().getExtras().getString("oldPrice");
+        String newPrice=getIntent().getExtras().getString("newPRice");
+
+
+
+        mainTitle.setText(title);
+        subTitle.setText("");
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,12 +86,13 @@ public class FinalProduct extends AppCompatActivity {
 
     private void setSliderViews(){
 
-        for(int i=0;i<=4;i++){
+        String imgUri=getIntent().getExtras().getString("imgUrl");
+        for(int i=0;i<1;i++){
 
             DefaultSliderView sliderView=new DefaultSliderView(this);
             switch (i){
                 case 0:
-                    sliderView.setImageUrl("https://dkstatics-public.digikala.com/digikala-products/4612025.jpg?x-oss-process=image/resize,h_800/quality,q_80");
+                    sliderView.setImageUrl(imgUri);
                     break;
                 case 1:
                     sliderView.setImageUrl("https://dkstatics-public.digikala.com/digikala-products/4612026.jpg?x-oss-process=image/resize,h_800/quality,q_80");
@@ -101,7 +108,7 @@ public class FinalProduct extends AppCompatActivity {
                     break;
             }
 
-            sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+            sliderView.setImageScaleType(ImageView.ScaleType.FIT_CENTER);
             //sliderView.setDescription("Jackdaws love my big sphinx of quartz." + (i + 1));
             //final int finalI=i;
            // sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {

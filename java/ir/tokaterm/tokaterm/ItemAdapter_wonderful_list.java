@@ -46,17 +46,19 @@ public class ItemAdapter_wonderful_list extends
         Glide.with(myContext).load(url).centerCrop().placeholder(R.drawable.a1).into(myViewHolder_wonderful.image);
 
         myViewHolder_wonderful.nameTitle.setText(item.getNameTitle());
-        myViewHolder_wonderful.oldprice.setText(item.getOffPercentage()+"تومان ");
+        myViewHolder_wonderful.oldprice.setText(String.format("%,d",Integer.parseInt(item.getPrice()))+" تومان ");
         myViewHolder_wonderful.oldprice. setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        myViewHolder_wonderful.newPrice.setText(newPrice(item.getOffPercentage(),item.getPrice()));
+        myViewHolder_wonderful.newPrice.setText(newPrice(item.getPrice(),item.getOffPercentage()));
 
         myViewHolder_wonderful.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent fp=new Intent(myContext,FinalProduct.class);
+                fp.putExtra("imgUrl",item.getImage());
                 fp.putExtra("title",item.getNameTitle());
                 fp.putExtra("oldPrice",item.getPrice());
+                fp.putExtra("newPrice",newPrice(item.getPrice(),item.getOffPercentage()));
                 myContext.startActivity(fp);
             }
         });
@@ -96,7 +98,7 @@ public class ItemAdapter_wonderful_list extends
         int offPer=Integer.parseInt(OffPer);
       int newPrice=price-((price*offPer)/100);
 
-        return String.format("%,d",newPrice)+"تومان ";
+        return String.format("%,d",newPrice)+" تومان ";
     }
 
 }

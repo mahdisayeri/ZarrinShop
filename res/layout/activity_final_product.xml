@@ -15,7 +15,7 @@
     android:orientation="vertical"
     tools:context=".FinalProduct">
 
-    <include layout="@layout/toolbar"></include>
+    <include layout="@layout/toolbar_white"></include>
 
     <include layout="@layout/imagesliderproduct"></include>
 

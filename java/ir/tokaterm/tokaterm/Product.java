@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
-//    @SerializedName("response")
-//    private String apiResponse;
-
     @SerializedName("imageUrl")
     private String apiImageUrl;
     @SerializedName("title")
