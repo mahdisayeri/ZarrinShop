@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductCategoryList">
+    tools:context="ir.tokaterm.tokaterm.FinalProduct">
 
-    <com.smarteist.autoimageslider.SliderLayout
-        android:id="@+id/imageSlider_product_sliderLayout"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_alignParentTop="true" />
-</android.widget.RelativeLayout>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                style="@style/CardView.SS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ss.com.bannerslider.Slider
+                        android:id="@+id/banner_slider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:slider_animateIndicators="true"
+                        app:slider_emptyView="@layout/layout_empty_view"
+                        app:slider_indicatorSize="10dp"
+                        app:slider_interval="0"
+                        app:slider_loopSlides="true"
+                        app:slider_selectedSlideIndicator="@drawable/indicator_circle_selected"
+                        app:slider_unselectedSlideIndicator="@drawable/indicator_circle_unselected" />
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

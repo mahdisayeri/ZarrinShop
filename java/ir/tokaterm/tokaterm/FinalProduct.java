@@ -17,26 +17,47 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ss.com.bannerslider.Slider;
+
 public class FinalProduct extends AppCompatActivity {
 
     private SliderLayout sliderLayout;
     private Toolbar toolbar;
     private ImageView sharebtn,favbtn;
-    private TextView mainTitle,subTitle,detail,comment,callbtn,presentbtn,textRate;
+    private TextView mainTitle,subTitle,detail,comment,callbtn,description,textRate;
     private RatingBar ratingBar;
+    private Slider slider;
+    private ApiInterface apiInterface;
+    private String product_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_product);
-
+        apiInterface=Api.getApi().create(ApiInterface.class);
         defineWidget();
-        setdata();
         setSupportActionBar(toolbar);
+        product_id=getIntent().getExtras().getString("post_id");
 
-        sliderLayout.setIndicatorAnimation(IndicatorAnimations.SWAP);
-        sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
-        //sliderLayout.setScrollTimeInSec(5);
-        setSliderViews();
+        Slider.init(new PicassoImageLoadingService(this));
+        setupViews();
+        setdata();
+       set_moreData();
+
+    }
+
+    private void setupViews() {
+        // setupToolbar();
+        slider = findViewById(R.id.banner_slider1);
+        final String imgUrl=getIntent().getExtras().getString("imgUrl");
+
+        //delay for testing empty view functionality
+        slider.setAdapter(new MainSliderAdapter(imgUrl,imgUrl,imgUrl,3));
+        slider.setSelectedSlide(0);
+
     }
 
     private void setdata(){
@@ -45,32 +66,54 @@ public class FinalProduct extends AppCompatActivity {
         String oldPrice=getIntent().getExtras().getString("oldPrice");
         String newPrice=getIntent().getExtras().getString("newPRice");
 
+     //   Toast.makeText(FinalProduct.this, product_id, Toast.LENGTH_SHORT).show();
+
 
 
         mainTitle.setText(title);
         subTitle.setText("");
-        comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(FinalProduct.this, "هیچ نظری ثبت نشده است!!! ", Toast.LENGTH_SHORT).show();
-            }
-        });
-        presentbtn.setText("دستبند صدف با طرح پولکی طلایی. متریال بکار رفته در دستبند صدف با طرح پولکی طلایی شامل صدف پولکی به قطر 2 سانتی متر, فریم طلا و نخ شاین دار به رنگ طلایی که با بافت بسیار مقاوم در کنار هم محکم شده اند. باور و اعتقاد قلبی به خواص مروارید, خصوصا خواص جادویی و ماورائی مروارید سبب گشته تا استفاده از آن پیشینه ای طولانی داشته باشد. اگر چه مروارید ساختاری کریستالی ندارد اما از قرن ها پیش و در میان اقوام گذشته مروارید از اهمیت بسیار زیادی در صنعت جواهر سازی و ساخت جواهرات برخوردار بوده است. باور و ایمان گذشتگان به خواص سنگ ها, خصوصا خواص مروارید سبب می گشت تا همواره و در همه حال این آن را همراه خود داشته باشند.");
+
         callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callIntent=new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:02120202020"));
+                callIntent.setData(Uri.parse("tel:0219377523892"));
                 startActivity(callIntent);
 
             }
         });
     }
 
+    private void set_moreData(){
+
+        Call<Product> productCall=MainActivity.apiInterface.product_moreDetailCall(product_id);
+        productCall.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, final Response<Product> response) {
+                comment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(FinalProduct.this,   response.body().getApiComment_count(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+               description.setText( response.body().getApiDescription());
+             //   Toast.makeText(FinalProduct.this,  response.body()+"", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
     private void defineWidget(){
 
         toolbar=findViewById(R.id.main_toolbar);
-        sliderLayout=findViewById(R.id.imageSlider_product_sliderLayout);
+       // sliderLayout=findViewById(R.id.imageSlider_product_sliderLayout);
         sharebtn=findViewById(R.id.final_product_share);
         favbtn=findViewById(R.id.final_product_favorite);
         mainTitle=findViewById(R.id.final_product_mainTitle);
@@ -78,49 +121,9 @@ public class FinalProduct extends AppCompatActivity {
         detail=findViewById(R.id.final_product_details);
         comment=findViewById(R.id.final_product_commentUser);
         callbtn=findViewById(R.id.final_product_call);
-        presentbtn=findViewById(R.id.final_product_presentation);
+       description=findViewById(R.id.final_product_presentation);
         textRate=findViewById(R.id.final_product_text_ratingBar);
         ratingBar=findViewById(R.id.final_product_ratingBar);
-
-    }
-
-    private void setSliderViews(){
-
-        String imgUri=getIntent().getExtras().getString("imgUrl");
-        for(int i=0;i<1;i++){
-
-            DefaultSliderView sliderView=new DefaultSliderView(this);
-            switch (i){
-                case 0:
-                    sliderView.setImageUrl(imgUri);
-                    break;
-                case 1:
-                    sliderView.setImageUrl("https://dkstatics-public.digikala.com/digikala-products/4612026.jpg?x-oss-process=image/resize,h_800/quality,q_80");
-                    break;
-                case 2:
-                    sliderView.setImageUrl("https://dkstatics-public.digikala.com/digikala-products/4612030.jpg?x-oss-process=image/resize,h_800/quality,q_80");
-                    break;
-                case 3:
-                    sliderView.setImageUrl("https://dkstatics-public.digikala.com/digikala-products/4612032.jpg?x-oss-process=image/resize,h_800/quality,q_80");
-                    break;
-                case 4:
-                    sliderView.setImageUrl("https://dkstatics-public.digikala.com/digikala-products/4637078.jpg?x-oss-process=image/resize,h_800/quality,q_80");
-                    break;
-            }
-
-            sliderView.setImageScaleType(ImageView.ScaleType.FIT_CENTER);
-            //sliderView.setDescription("Jackdaws love my big sphinx of quartz." + (i + 1));
-            //final int finalI=i;
-           // sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
-             //   @Override
-               // public void onSliderClick(SliderView sliderView) {
-                   // Toast.makeText(FinalProduct.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
-                //}
-            //});
-            //at last add this view in your layout :
-            sliderLayout.addSliderView(sliderView);
-
-        }
 
     }
 }

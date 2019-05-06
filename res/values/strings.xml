@@ -18,5 +18,7 @@
     <string name="connectivity_faild">خطا در اتصال به اینترنت !</string>
     <string name="Checkـnetworkـsettings">بررسی تنظیمات شبکه</string>
     <string name="retry_connected">تلاش مجدد</string>
-    <string name="describApp">بررسیءانتخاب و خرید آنلاین</string>
+    <string name="describApp">بررسی ِانتخاب و خرید آنلاین</string>
+
+    <string name="label_loading">This Is Empty View</string>
 </resources>

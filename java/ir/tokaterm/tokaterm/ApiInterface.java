@@ -19,4 +19,7 @@ public interface ApiInterface {
     @GET("wonderfulList.php")
     Call<JSONResponse> wonderfulListCall(@Query("wonderfulList") String wonderfulList);
 
+    @POST("product_moreDetails.php")
+    Call<Product> product_moreDetailCall(@Query("product_id")String product_id);
+
 }

@@ -55,6 +55,7 @@ public class ItemAdapter_wonderful_list extends
             public void onClick(View v) {
 
                 Intent fp=new Intent(myContext,FinalProduct.class);
+                fp.putExtra("post_id",item.getproduct_id());
                 fp.putExtra("imgUrl",item.getImage());
                 fp.putExtra("title",item.getNameTitle());
                 fp.putExtra("oldPrice",item.getPrice());

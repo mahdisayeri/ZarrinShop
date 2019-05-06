@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                              JSONResponse jsonResponse=response.body();
                             data=new ArrayList<>(Arrays.asList(jsonResponse.getObj1()));
                                    for(int i=0;i<data.size();i++){
-                                       itemListwonder.add(new Data_Model_wonderful_list(data.get(i).getApiImageUrl(),
+                                       itemListwonder.add(new Data_Model_wonderful_list(data.get(i).getApiproduct_id(),data.get(i).getApiImageUrl(),
                                              data.get(i).getApiTitle(),data.get(i).getApiprice(),data.get(i).getApiOffPercentage()));
 
 
