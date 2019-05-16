@@ -2,7 +2,7 @@ package ir.tokaterm.tokaterm;
 
 import com.google.gson.annotations.SerializedName;
 
-public class JSONResponse {
+public class ProductArray {
 
     private Product[] obj1;
 

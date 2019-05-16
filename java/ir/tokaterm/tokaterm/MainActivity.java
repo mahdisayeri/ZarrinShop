@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ArrayList<Product> data;
 
+    private int slidNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setSliderViews(){
 
       for(int i=0;i<=3;i++){
-
           DefaultSliderView sliderView=new DefaultSliderView(this);
           switch (i){
               case 0:
@@ -176,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                   break;
               case 2:
                   sliderView.setImageUrl("https://www.digizargar.com/new/images/Gift.jpeg");
+
                   break;
               case 3:
                   sliderView.setImageUrl("https://www.digizargar.com/new/images/Economic.jpeg");
@@ -183,16 +185,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           }
 
           sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-          //sliderView.setDescription("Jackdaws love my big sphinx of quartz." + (i + 1));
-          final int finalI=i;
+          slidNumber=i+1;
+         // sliderView.setDescription("Jackdaws love my big sphinx of quartz." + (slidNumber));
+
           sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
               @Override
               public void onSliderClick(SliderView sliderView) {
-                //  Toast.makeText(MainActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
-                  Intent ni=new Intent(MainActivity.this,ProductCategoryList.class);
-                  startActivity(ni);
+                 // Toast.makeText(MainActivity.this, "This is slider"+slidNumber , Toast.LENGTH_SHORT).show();
+                  //  Intent ni=new Intent(MainActivity.this,ProductCategoryList.class);
+                  // startActivity(ni);
               }
           });
+
+
           //at last add this view in your layout :
           sliderLayout.addSliderView(sliderView);
 
@@ -204,17 +209,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setDataWonderful(){
 
-        String imageUrl;
-        final String[] title = new String[1];
-        String price;
+       Call<ProductArray> callProduct=apiInterface.wonderfulListCall("true");
 
-       Call<JSONResponse> callProduct=apiInterface.wonderfulListCall("true");
-
-       callProduct.enqueue(new Callback<JSONResponse>() {
+       callProduct.enqueue(new Callback<ProductArray>() {
                                @Override
-                               public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
+                               public void onResponse(Call<ProductArray> call, Response<ProductArray> response) {
 
-                             JSONResponse jsonResponse=response.body();
+                             ProductArray jsonResponse=response.body();
                             data=new ArrayList<>(Arrays.asList(jsonResponse.getObj1()));
                                    for(int i=0;i<data.size();i++){
                                        itemListwonder.add(new Data_Model_wonderful_list(data.get(i).getApiproduct_id(),data.get(i).getApiImageUrl(),
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                }
 
                                @Override
-                               public void onFailure(Call<JSONResponse> call, Throwable t) {
+                               public void onFailure(Call<ProductArray> call, Throwable t) {
                                    Toast.makeText(MainActivity.this,"error", Toast.LENGTH_SHORT).show();
 
                                }
@@ -237,17 +238,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setData(){
 
-        itemList.add(new Data_Model_category("دستبند طلا"));
-        itemList.add(new Data_Model_category("گوشواره طلا"));
-        itemList.add(new Data_Model_category("سرویس طلا"));
-        itemList.add(new Data_Model_category("نیم ست طلا"));
-        itemList.add(new Data_Model_category("انگشتر طلا"));
-        itemList.add(new Data_Model_category("گردنبند طلا"));
-        itemList.add(new Data_Model_category("‍‍پابند طلا"));
-        itemList.add(new Data_Model_category("حلقه طلا"));
-        itemList.add(new Data_Model_category("تک دست والنگوطلا"));
-        itemList.add(new Data_Model_category("ساعت و آویز طلا"));
-        itemList.add(new Data_Model_category("مدال و پلاک طلا"));
+        itemList.add(new Data_Model_category("آویز"));
+        itemList.add(new Data_Model_category("دستبند"));
+        itemList.add(new Data_Model_category("گوشواره"));
+        itemList.add(new Data_Model_category("سرویس"));
+        itemList.add(new Data_Model_category("earring"));
+        itemList.add(new Data_Model_category("انگشتر"));
+        itemList.add(new Data_Model_category("گردنبند"));
+        itemList.add(new Data_Model_category("‍‍ پابند"));
+        itemList.add(new Data_Model_category("حلقه"));
+        itemList.add(new Data_Model_category("تک دست والنگو"));
+        itemList.add(new Data_Model_category("مدال و پلاک"));
         madapter.notifyDataSetChanged();
     }
 

@@ -1,6 +1,7 @@
 package ir.tokaterm.tokaterm;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -36,9 +39,14 @@ public class Item_Adapter_product_cat_list extends RecyclerView.Adapter<Item_Ada
     public void onBindViewHolder(@NonNull myViewHolder_product_cat_list myViewHolder_product_cat_list, final int i) {
 
       Data_Mode_product_cat_list  item=itemlist.get(i);
+      String imgurl=item.getImage();
+        Glide.with(myContext).load(imgurl).centerCrop().placeholder(R.drawable.a1).into(myViewHolder_product_cat_list.imageView);
 
-      myViewHolder_product_cat_list.imageView.setImageResource(item.getImage());
-      myViewHolder_product_cat_list.titlename.setText(item.getTitle());
+      myViewHolder_product_cat_list.mainTitle.setText(item.getMainTitle());
+      myViewHolder_product_cat_list.subTitle.setText("");
+      myViewHolder_product_cat_list.oldPrice.setText(String.format("%,d",Integer.parseInt(item.getOlePrice()))+" تومان ");
+      myViewHolder_product_cat_list.oldPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+      myViewHolder_product_cat_list.newPrice.setText(newPrice(item.getOlePrice(),item.getOffPersentage()));
 
       myViewHolder_product_cat_list.ll.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -56,16 +64,29 @@ public class Item_Adapter_product_cat_list extends RecyclerView.Adapter<Item_Ada
     }
 
     public class myViewHolder_product_cat_list extends RecyclerView.ViewHolder{
-       private TextView titlename;
+       private TextView mainTitle,subTitle,oldPrice,newPrice;
        private ImageView imageView;
+
        private LinearLayout ll;
 
         public myViewHolder_product_cat_list(@NonNull View itemView) {
             super(itemView);
 
-            titlename=itemView.findViewById(R.id.row_product_cat_list_textview);
+            mainTitle=itemView.findViewById(R.id.row_product_cat_list_main_title);
+            subTitle=itemView.findViewById(R.id.row_product_cat_list_subtitle);
+            oldPrice=itemView.findViewById(R.id.row_product_cat_list_oldprice);
+            newPrice=itemView.findViewById(R.id.row_product_cat_list_newprice);
+
             imageView=itemView.findViewById(R.id.row_product_cat_list_imageview);
             ll=itemView.findViewById(R.id.row_product_cat_list_linearLayout);
         }
+    }
+
+    private String newPrice(String Price,String OffPer){
+        int price=Integer.parseInt(Price);
+        int offPer=Integer.parseInt(OffPer);
+        int newPrice=price-((price*offPer)/100);
+
+        return String.format("%,d",newPrice)+" تومان ";
     }
 }

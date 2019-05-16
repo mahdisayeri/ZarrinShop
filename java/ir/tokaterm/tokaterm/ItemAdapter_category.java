@@ -30,7 +30,7 @@ public class ItemAdapter_category extends RecyclerView.Adapter<ItemAdapter_categ
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
 
         Data_Model_category item=itemList.get(i);
 
@@ -40,8 +40,9 @@ public class ItemAdapter_category extends RecyclerView.Adapter<ItemAdapter_categ
         myViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Toast.makeText(myContext, "item" + i, Toast.LENGTH_LONG).show();
+
                 Intent product=new Intent(myContext,ProductCategoryList.class);
+                product.putExtra("category",myViewHolder.titleList.getText().toString());
                 myContext.startActivity(product);
 
 
