@@ -43,13 +43,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
    SliderLayout sliderLayout;
 
-    RecyclerView recyclerView,wonderRecycler,product_cat_list_recycler;
+    RecyclerView recyclerView,wonderRecycler,bestSellerRecycler,product_cat_list_recycler;
 
 
     List<Data_Model_category> itemList=new ArrayList<>();
     ItemAdapter_category madapter;
     List<Data_Model_wonderful_list> itemListwonder=new ArrayList<>();
-    ItemAdapter_wonderful_list wonderAdapter;
+    List<Data_Model_wonderful_list> itemListseller=new ArrayList<>();
+
+    ItemAdapter_wonderful_list wonderAdapter,bestSellerAdapter;
 
     List<Data_Mode_product_cat_list> itemlist_product_cat_list=new ArrayList<>();
     Item_Adapter_product_cat_list product_cat_list_Adapter;
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(madapter);
         setData();
-    //****************************************
+    //**********************wonderFull recycler******************
         wonderRecycler=findViewById(R.id.first_layout_wonderful_recyclerView);
         wonderAdapter=new ItemAdapter_wonderful_list(itemListwonder,this);
         RecyclerView.LayoutManager wlm=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
@@ -161,8 +163,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         wonderRecycler.setHasFixedSize(true);
         wonderRecycler.setAdapter(wonderAdapter);
         setDataWonderful();
-    }
 
+
+
+        //********************bestSeller recycler*******************
+        bestSellerRecycler=findViewById(R.id.recycler_in_horizontal_recycler_layout);
+        bestSellerAdapter=new ItemAdapter_wonderful_list(itemListseller,this);
+        RecyclerView.LayoutManager lm=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        bestSellerRecycler.setLayoutManager(lm);
+        bestSellerRecycler.setItemAnimator(new DefaultItemAnimator());
+        bestSellerRecycler.setHasFixedSize(true);
+        bestSellerRecycler.setAdapter(bestSellerAdapter);
+        setDataBestSeller();
+
+    }
 
     private void setSliderViews(){
 
@@ -209,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setDataWonderful(){
 
-       Call<ProductArray> callProduct=apiInterface.wonderfulListCall("true");
+       Call<ProductArray> callProduct=apiInterface.wonderfulListCall("specialOffer");
 
        callProduct.enqueue(new Callback<ProductArray>() {
                                @Override
@@ -225,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                    }
 
                                    wonderAdapter.notifyDataSetChanged();
+
                                }
 
                                @Override
@@ -242,7 +257,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         itemList.add(new Data_Model_category("دستبند"));
         itemList.add(new Data_Model_category("گوشواره"));
         itemList.add(new Data_Model_category("سرویس"));
-        itemList.add(new Data_Model_category("earring"));
         itemList.add(new Data_Model_category("انگشتر"));
         itemList.add(new Data_Model_category("گردنبند"));
         itemList.add(new Data_Model_category("‍‍ پابند"));
@@ -282,30 +296,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
+        Intent product=new Intent(MainActivity.this,ProductCategoryList.class);
         switch (menuItem.getItemId()){
 
             case R.id.nav_home:
               //  Toast.makeText(this, "Home", Toast.LENGTH_LONG).show();
             break;
-            case R.id.nav_productList:
-               // Intent product=new Intent(MainActivity.this,ProductCategoryList.class);
-               // startActivity(product);
-               Toast.makeText(this, "ProductList", Toast.LENGTH_LONG).show();
-                break;
+//            case R.id.nav_productList:
+//               // Intent product=new Intent(MainActivity.this,ProductCategoryList.class);
+//               // startActivity(product);
+//               Toast.makeText(this, "ProductList", Toast.LENGTH_LONG).show();
+//                break;
             case R.id.nav_basket:
-                Toast.makeText(this, "Basket", Toast.LENGTH_LONG).show();
+                product.putExtra("category","myBasket");
+                startActivity(product);
                 break;
             case R.id.nav_specialOffer:
-                Toast.makeText(this, "specialOffer", Toast.LENGTH_LONG).show();
+                product.putExtra("category","specialOffer");
+                startActivity(product);
                 break;
             case R.id.nav_bestsellers:
-                Toast.makeText(this, "bestSeller", Toast.LENGTH_LONG).show();
+                product.putExtra("category","sales_number");
+                startActivity(product);
                 break;
             case R.id.nav_mostviewed:
-                Toast.makeText(this, "mostViewed", Toast.LENGTH_LONG).show();
+                product.putExtra("category","view_number");
+                startActivity(product);
                 break;
             case R.id.nav_newest:
-                Toast.makeText(this, "newst", Toast.LENGTH_LONG).show();
+                product.putExtra("category","newest");
+                startActivity(product);
                 break;
             case R.id.nav_setting:
                 Toast.makeText(this, "Setting", Toast.LENGTH_LONG).show();
@@ -321,7 +341,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
-
         return true;
     }
 
@@ -333,5 +352,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       }else{
           super.onBackPressed();
       }
+    }
+
+
+    private void setDataBestSeller(){
+
+        Call<ProductArray> callProduct=apiInterface.best_seller_listCall("sales_number");
+
+        callProduct.enqueue(new Callback<ProductArray>() {
+            @Override
+            public void onResponse(Call<ProductArray> call, Response<ProductArray> response) {
+
+                ProductArray jsonResponse=response.body();
+                data=new ArrayList<>(Arrays.asList(jsonResponse.getObj1()));
+                for(int i=0;i<data.size();i++){
+                    itemListseller.add(new Data_Model_wonderful_list(data.get(i).getApiproduct_id(),data.get(i).getApiImageUrl(),
+                            data.get(i).getApiTitle(),data.get(i).getApiprice(),data.get(i).getApiOffPercentage()));
+
+                }
+
+                bestSellerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ProductArray> call, Throwable t) {
+                Toast.makeText(MainActivity.this,"error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 }

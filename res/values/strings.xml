@@ -23,4 +23,6 @@
     <string name="label_loading">This Is Empty View</string>
     <string name="main_title">عنوان اصلی</string>
     <string name="sub_title">عنوان فرعی</string>
+    <string name="AllList">لیست کامل</string>
+    <string name="bestSellerTitle">محصولات پرفروش</string>
 </resources>

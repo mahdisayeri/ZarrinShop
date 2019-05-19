@@ -37,7 +37,7 @@
 
       <include layout="@layout/tabligh_layout"></include>
 
-
+     <include layout="@layout/horizontal_recycler_layout"></include>
 
 
     </LinearLayout>

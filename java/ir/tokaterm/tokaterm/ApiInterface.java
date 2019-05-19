@@ -15,7 +15,7 @@ public interface ApiInterface {
     Call<User> logincall(@Query("username") String UserName,@Query("password") String Password);
 
     @GET("wonderfulList.php")
-    Call<ProductArray> wonderfulListCall(@Query("wonderfulList") String wonderfulList);
+    Call<ProductArray> wonderfulListCall(@Query("productList") String wonderfulList);
 
     @POST("product_moreDetails.php")
     Call<Product> product_moreDetailCall(@Query("product_id")String product_id);
@@ -23,5 +23,6 @@ public interface ApiInterface {
     @POST("product_category_list.php")
     Call<ProductArray> product_category_listCall(@Query("category")String Category);
 
-
+    @POST("bestSellerList.php")
+    Call<ProductArray> best_seller_listCall(@Query("category")String Category);
 }

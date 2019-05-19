@@ -50,6 +50,7 @@ public class ProductCategoryList extends AppCompatActivity {
         product_cat_list_recycler.setAdapter(product_cat_list_Adapter);
 
         setDataProduct_cat_list(category);
+       // Toast.makeText(this, category, Toast.LENGTH_LONG).show();
 
         //**********END recyclerview for product category list
 
@@ -57,47 +58,100 @@ public class ProductCategoryList extends AppCompatActivity {
    }
 
     private void setDataProduct_cat_list(String category){
-       // Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
-        final Call<ProductArray> productArrayCall=MainActivity.apiInterface.product_category_listCall(category);
 
-        productArrayCall.enqueue(new Callback<ProductArray>() {
-            @Override
-            public void onResponse(Call<ProductArray> call, Response<ProductArray> response) {
 
-                ProductArray jsonresponse=response.body();
-                data=new ArrayList<>(Arrays.asList(jsonresponse.getObj1()));
-                if(data.size()>0){
-                    for(int i=0;i<data.size();i++){
-                        itemlist_product_cat_list.add(new Data_Mode_product_cat_list(data.get(i).getApiproduct_id(),
-                                data.get(i).getApiImageUrl(), data.get(i).getApiTitle(),data.get(i).getApiprice(),
-                                data.get(i).getApiOffPercentage()));
+        if(category.equals("sales_number")||category.equals("view_number")){
+
+            final  Call<ProductArray> productArrayCall=MainActivity.apiInterface.best_seller_listCall(category);
+            productArrayCall.enqueue(new Callback<ProductArray>() {
+                @Override
+                public void onResponse(Call<ProductArray> call, Response<ProductArray> response) {
+
+                    ProductArray jsonresponse=response.body();
+                    data=new ArrayList<>(Arrays.asList(jsonresponse.getObj1()));
+                    if(data.size()>0){
+                        for(int i=0;i<data.size();i++){
+                            itemlist_product_cat_list.add(new Data_Mode_product_cat_list(data.get(i).getApiproduct_id(),
+                                    data.get(i).getApiImageUrl(), data.get(i).getApiTitle(),data.get(i).getApiprice(),
+                                    data.get(i).getApiOffPercentage()));
+                        }
+                    }else{
+                        Toast.makeText(ProductCategoryList.this,"موجودی 0 !!!", Toast.LENGTH_LONG).show();
+                        finish();
+
                     }
-                }else{
-                    Toast.makeText(ProductCategoryList.this,"موجودی 0 !!!", Toast.LENGTH_LONG).show();
-                    finish();
+                    product_cat_list_Adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ProductArray> call, Throwable t) {
+                    Toast.makeText(ProductCategoryList.this, t+"", Toast.LENGTH_LONG).show();
+
 
                 }
-                product_cat_list_Adapter.notifyDataSetChanged();
-            }
+            });
 
-            @Override
-            public void onFailure(Call<ProductArray> call, Throwable t) {
-                Toast.makeText(ProductCategoryList.this, t+"", Toast.LENGTH_LONG).show();
+        }else if(category.equals("specialOffer")||category.equals("newest")){
+            final  Call<ProductArray> productArrayCall=MainActivity.apiInterface.wonderfulListCall(category);
+            productArrayCall.enqueue(new Callback<ProductArray>() {
+                @Override
+                public void onResponse(Call<ProductArray> call, Response<ProductArray> response) {
+
+                    ProductArray jsonresponse=response.body();
+                    data=new ArrayList<>(Arrays.asList(jsonresponse.getObj1()));
+                    if(data.size()>0){
+                        for(int i=0;i<data.size();i++){
+                            itemlist_product_cat_list.add(new Data_Mode_product_cat_list(data.get(i).getApiproduct_id(),
+                                    data.get(i).getApiImageUrl(), data.get(i).getApiTitle(),data.get(i).getApiprice(),
+                                    data.get(i).getApiOffPercentage()));
+                        }
+                    }else{
+                        Toast.makeText(ProductCategoryList.this,"موجودی 0 !!!", Toast.LENGTH_LONG).show();
+                        finish();
+
+                    }
+                    product_cat_list_Adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ProductArray> call, Throwable t) {
+                    Toast.makeText(ProductCategoryList.this, t+"", Toast.LENGTH_LONG).show();
 
 
-            }
-        });
+                }
+            });
+
+        } else{
+            final  Call<ProductArray> productArrayCall=MainActivity.apiInterface.product_category_listCall(category);
+            productArrayCall.enqueue(new Callback<ProductArray>() {
+                @Override
+                public void onResponse(Call<ProductArray> call, Response<ProductArray> response) {
+
+                    ProductArray jsonresponse=response.body();
+                    data=new ArrayList<>(Arrays.asList(jsonresponse.getObj1()));
+                    if(data.size()>0){
+                        for(int i=0;i<data.size();i++){
+                            itemlist_product_cat_list.add(new Data_Mode_product_cat_list(data.get(i).getApiproduct_id(),
+                                    data.get(i).getApiImageUrl(), data.get(i).getApiTitle(),data.get(i).getApiprice(),
+                                    data.get(i).getApiOffPercentage()));
+                        }
+                    }else{
+                        Toast.makeText(ProductCategoryList.this,"موجودی 0 !!!", Toast.LENGTH_LONG).show();
+                        finish();
+
+                    }
+                    product_cat_list_Adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ProductArray> call, Throwable t) {
+                    Toast.makeText(ProductCategoryList.this, t+"", Toast.LENGTH_LONG).show();
 
 
+                }
+            });
+        }
 
-
-//        itemlist_product_cat_list.add(new Data_Mode_product_cat_list("دستبند طلا اسپرت",R.drawable.dbt1));
-//        itemlist_product_cat_list.add(new Data_Mode_product_cat_list("دستبند طلا اسپرت",R.drawable.dbt2));
-//        itemlist_product_cat_list.add(new Data_Mode_product_cat_list("دستبند طلا اسپرت ",R.drawable.dbt3));
-//
-//        itemlist_product_cat_list.add(new Data_Mode_product_cat_list("دستبند طلا اسپرتا",R.drawable.dbt4));
-//        itemlist_product_cat_list.add(new Data_Mode_product_cat_list("دستبند طلا اسپرت",R.drawable.dbt5));
-//        itemlist_product_cat_list.add(new Data_Mode_product_cat_list("دستبند طلا اسپرت ",R.drawable.dbt6));
 
 
     }

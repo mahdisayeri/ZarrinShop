@@ -6,45 +6,45 @@
 
                 <item android:title="@string/home" android:id="@+id/nav_home"
                     android:icon="@drawable/ic_home_black_24dp"></item>
+        <!--
+                    <item android:title="@string/ProductCategoryList" android:id="@+id/nav_productList"
+                         android:icon="@drawable/ic_list_black_24dp" ></item>
+                    -->
+         </group>
 
-                <item android:title="@string/ProductCategoryList" android:id="@+id/nav_productList"
-                    android:icon="@drawable/ic_list_black_24dp" ></item>
-
-    </group>
-
-    <group>
-
-
-                <item android:title="@string/Cart" android:id="@+id/nav_basket"
-                    android:icon="@drawable/ic_shopping_cart_black_24dp" ></item>
-
-    </group>
-
-    <group>
+         <group>
 
 
-        <item android:title="@string/specialOffer" android:id="@+id/nav_specialOffer"
-            android:icon="@drawable/ic_star_black_24dp" > </item>
-        <item android:title="@string/bestsellers" android:id="@+id/nav_bestsellers"
-            android:icon="@drawable/ic_star_black_24dp"></item>
-        <item android:title="@string/MostViewed" android:id="@+id/nav_mostviewed"
-            android:icon="@drawable/ic_star_black_24dp"></item>
-        <item android:title="@string/newest" android:id="@+id/nav_newest"
-            android:icon="@drawable/ic_star_black_24dp"></item>
+                     <item android:title="@string/Cart" android:id="@+id/nav_basket"
+                         android:icon="@drawable/ic_shopping_cart_black_24dp" ></item>
+
+         </group>
+
+         <group>
 
 
-    </group>
-
-    <group>
-
-
-        <item android:title="@string/setting" android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_settings_black_24dp"></item>
-        <item android:title="@string/FrequentlyAskedQuestions" android:id="@+id/nav_frequentlyAQ"
-            android:icon="@drawable/ic_help_black_24dp"></item>
-        <item android:title="@string/aboutUs" android:id="@+id/nav_aboutMe"
-            android:icon="@drawable/ic_group_work_black_24dp"></item>
+             <item android:title="@string/specialOffer" android:id="@+id/nav_specialOffer"
+                 android:icon="@drawable/ic_star_black_24dp" > </item>
+             <item android:title="@string/bestsellers" android:id="@+id/nav_bestsellers"
+                 android:icon="@drawable/ic_star_black_24dp"></item>
+             <item android:title="@string/MostViewed" android:id="@+id/nav_mostviewed"
+                 android:icon="@drawable/ic_star_black_24dp"></item>
+             <item android:title="@string/newest" android:id="@+id/nav_newest"
+                 android:icon="@drawable/ic_star_black_24dp"></item>
 
 
-    </group>
-</menu>
+         </group>
+
+         <group>
+
+
+             <item android:title="@string/setting" android:id="@+id/nav_setting"
+                 android:icon="@drawable/ic_settings_black_24dp"></item>
+             <item android:title="@string/FrequentlyAskedQuestions" android:id="@+id/nav_frequentlyAQ"
+                 android:icon="@drawable/ic_help_black_24dp"></item>
+             <item android:title="@string/aboutUs" android:id="@+id/nav_aboutMe"
+                 android:icon="@drawable/ic_group_work_black_24dp"></item>
+
+
+         </group>
+        </menu>

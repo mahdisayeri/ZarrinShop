@@ -1,6 +1,7 @@
 package ir.tokaterm.tokaterm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -38,20 +39,32 @@ public class Item_Adapter_product_cat_list extends RecyclerView.Adapter<Item_Ada
     @Override
     public void onBindViewHolder(@NonNull myViewHolder_product_cat_list myViewHolder_product_cat_list, final int i) {
 
-      Data_Mode_product_cat_list  item=itemlist.get(i);
+      final Data_Mode_product_cat_list  item=itemlist.get(i);
       String imgurl=item.getImage();
         Glide.with(myContext).load(imgurl).centerCrop().placeholder(R.drawable.a1).into(myViewHolder_product_cat_list.imageView);
 
       myViewHolder_product_cat_list.mainTitle.setText(item.getMainTitle());
       myViewHolder_product_cat_list.subTitle.setText("");
-      myViewHolder_product_cat_list.oldPrice.setText(String.format("%,d",Integer.parseInt(item.getOlePrice()))+" تومان ");
-      myViewHolder_product_cat_list.oldPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-      myViewHolder_product_cat_list.newPrice.setText(newPrice(item.getOlePrice(),item.getOffPersentage()));
 
+        if(Integer.parseInt(item.getOffPercentage())>0) {
+            myViewHolder_product_cat_list.oldPrice.setText(String.format("%,d", Integer.parseInt(item.getOlePrice()))+" تومان ");
+            myViewHolder_product_cat_list.oldPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            myViewHolder_product_cat_list.newPrice.setText(newPrice(item.getOlePrice(), item.getOffPercentage()));
+        }else{
+            myViewHolder_product_cat_list.oldPrice.setVisibility(View.GONE);
+            myViewHolder_product_cat_list.newPrice.setText(String.format("%,d", Integer.parseInt(item.getOlePrice()))+" تومان ");
+
+        }
       myViewHolder_product_cat_list.ll.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              Toast.makeText(myContext, "item"+i, Toast.LENGTH_SHORT).show();
+              Intent fp=new Intent(myContext,FinalProduct.class);
+              fp.putExtra("post_id",item.getProduct_id());
+              fp.putExtra("imgUrl",item.getImage());
+              fp.putExtra("title",item.getMainTitle());
+              fp.putExtra("oldPrice",item.getOlePrice());
+              fp.putExtra("newPrice",newPrice(item.getOlePrice(),item.getOffPercentage()));
+              myContext.startActivity(fp);
           }
       });
 

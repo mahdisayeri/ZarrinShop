@@ -28,8 +28,14 @@ public class Product {
     @SerializedName("product_description")
     private String apiDescription;
 
-    @SerializedName("other_imageUrl")
-    private String apiOther_imageUrl;
+    @SerializedName("img1")
+    private String apiImg1;
+
+    @SerializedName("img2")
+    private String apiImg2;
+
+    @SerializedName("img3")
+    private String apiImg3;
 
 
 //    public Product(String apiComment_count,String apiDescription) {
@@ -39,15 +45,19 @@ public class Product {
 //
 //    }
 
-    public Product(String apiproduct_id,String apiImageUrl, String apiTitle, String apiprice,
-                   String apiOffPercentage,String apiComment_count,String apiDescription) {
-        this.apiproduct_id=apiproduct_id;
+
+    public Product(String apiproduct_id, String apiImageUrl, String apiTitle, String apiprice, String apiOffPercentage, String apiRate, String apiComment_count, String apiDescription, String apiImg1, String apiImg2, String apiImg3) {
+        this.apiproduct_id = apiproduct_id;
         this.apiImageUrl = apiImageUrl;
         this.apiTitle = apiTitle;
         this.apiprice = apiprice;
         this.apiOffPercentage = apiOffPercentage;
-        this.apiComment_count=apiComment_count;
+        this.apiRate = apiRate;
+        this.apiComment_count = apiComment_count;
         this.apiDescription = apiDescription;
+        this.apiImg1 = apiImg1;
+        this.apiImg2 = apiImg2;
+        this.apiImg3 = apiImg3;
     }
 
     public String getApiComment_count() {
@@ -114,11 +124,27 @@ public class Product {
         this.apiDescription = apiDescription;
     }
 
-    public String getApiOther_imageUrl() {
-        return apiOther_imageUrl;
+    public String getApiImg1() {
+        return apiImg1;
     }
 
-    public void setApiOther_imageUrl(String apiOther_imageUrl) {
-        this.apiOther_imageUrl = apiOther_imageUrl;
+    public void setApiImg1(String apiImg1) {
+        this.apiImg1 = apiImg1;
+    }
+
+    public String getApiImg2() {
+        return apiImg2;
+    }
+
+    public void setApiImg2(String apiImg2) {
+        this.apiImg2 = apiImg2;
+    }
+
+    public String getApiImg3() {
+        return apiImg3;
+    }
+
+    public void setApiImg3(String apiImg3) {
+        this.apiImg3 = apiImg3;
     }
 }

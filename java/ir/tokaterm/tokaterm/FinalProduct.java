@@ -24,7 +24,7 @@ import ss.com.bannerslider.Slider;
 
 public class FinalProduct extends AppCompatActivity {
 
-    private SliderLayout sliderLayout;
+  //  private SliderLayout sliderLayout;
     private Toolbar toolbar;
     private ImageView sharebtn,favbtn;
     private TextView mainTitle,subTitle,detail,comment,callbtn,description,textRate;
@@ -43,36 +43,30 @@ public class FinalProduct extends AppCompatActivity {
         product_id=getIntent().getExtras().getString("post_id");
 
         Slider.init(new PicassoImageLoadingService(this));
-        setupViews();
-        setdata();
-       set_moreData();
+        set_moreData();
+
 
     }
 
-    private void setupViews() {
+    private void setupViews(String img1,String img2,String img3) {
+
         // setupToolbar();
         slider = findViewById(R.id.banner_slider1);
-        final String imgUrl=getIntent().getExtras().getString("imgUrl");
+        final String img=getIntent().getExtras().getString("imgUrl");
 
         //delay for testing empty view functionality
-        slider.setAdapter(new MainSliderAdapter(imgUrl,imgUrl,imgUrl,3));
-        slider.setSelectedSlide(0);
+        slider.setAdapter(new MainSliderAdapter(img2,img1,img,3));
+        slider.setSelectedSlide(2);
 
     }
 
-    private void setdata(){
-
+    private void setdata(final String commentCount, String contentdescription){
         String title=getIntent().getExtras().getString("title");
         String oldPrice=getIntent().getExtras().getString("oldPrice");
         String newPrice=getIntent().getExtras().getString("newPRice");
-
-     //   Toast.makeText(FinalProduct.this, product_id, Toast.LENGTH_SHORT).show();
-
-
-
         mainTitle.setText(title);
         subTitle.setText("");
-
+        description.setText(contentdescription);
         callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +76,14 @@ public class FinalProduct extends AppCompatActivity {
 
             }
         });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FinalProduct.this,commentCount, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     private void set_moreData(){
@@ -90,16 +92,19 @@ public class FinalProduct extends AppCompatActivity {
         productCall.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, final Response<Product> response) {
-                comment.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(FinalProduct.this,   response.body().getApiComment_count(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-               description.setText( response.body().getApiDescription());
              //   Toast.makeText(FinalProduct.this,  response.body()+"", Toast.LENGTH_SHORT).show();
+             String  imgUrl1=response.body().getApiImg1();
+             String  imgUrl2=response.body().getApiImg2();
+             String  imgUrl3=response.body().getApiImg3();
+             String commentCount=response.body().getApiComment_count();
+             String description=response.body().getApiDescription();
+
+             setupViews(imgUrl1,imgUrl2,imgUrl3);
+             setdata(commentCount,description);
+
 
             }
+
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {

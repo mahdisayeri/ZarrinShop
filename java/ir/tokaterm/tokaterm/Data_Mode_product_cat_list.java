@@ -6,16 +6,16 @@ public class Data_Mode_product_cat_list {
     private String mainTitle;
    // private String subTitle;
     private String olePrice;
-    private String offPersentage;
+    private String offPercentage;
 
 
-    public Data_Mode_product_cat_list(String product_id, String image, String mainTitle,String olePrice, String offPersentage) {
+    public Data_Mode_product_cat_list(String product_id, String image, String mainTitle,String olePrice, String offPercentage) {
         this.product_id = product_id;
         this.image = image;
         this.mainTitle = mainTitle;
        // this.subTitle = subTitle;
         this.olePrice = olePrice;
-        this.offPersentage = offPersentage;
+        this.offPercentage = offPercentage;
     }
 
     public String getProduct_id() {
@@ -58,11 +58,11 @@ public class Data_Mode_product_cat_list {
         this.olePrice = olePrice;
     }
 
-    public String getOffPersentage() {
-        return offPersentage;
+    public String getOffPercentage() {
+        return offPercentage;
     }
 
     public void setOffPersentage(String offPersentage) {
-        this.offPersentage = offPersentage;
+        this.offPercentage = offPersentage;
     }
 }

@@ -46,10 +46,16 @@ public class ItemAdapter_wonderful_list extends
         Glide.with(myContext).load(url).centerCrop().placeholder(R.drawable.a1).into(myViewHolder_wonderful.image);
 
         myViewHolder_wonderful.nameTitle.setText(item.getNameTitle());
-        myViewHolder_wonderful.oldprice.setText(String.format("%,d",Integer.parseInt(item.getPrice()))+" تومان ");
-        myViewHolder_wonderful.oldprice. setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        myViewHolder_wonderful.newPrice.setText(newPrice(item.getPrice(),item.getOffPercentage()));
+      //  Toast.makeText(myContext,item.getOffPercentage(), Toast.LENGTH_SHORT).show();
 
+        if(Integer.parseInt(item.getOffPercentage())>0) {
+            myViewHolder_wonderful.oldprice.setText(String.format("%,d", Integer.parseInt(item.getPrice())) + " تومان ");
+            myViewHolder_wonderful.oldprice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            myViewHolder_wonderful.newPrice.setText(newPrice(item.getPrice(), item.getOffPercentage()));
+        }else{
+            myViewHolder_wonderful.oldprice.setVisibility(View.GONE);
+            myViewHolder_wonderful.newPrice.setText(String.format("%,d", Integer.parseInt(item.getPrice())) + " تومان ");
+        }
         myViewHolder_wonderful.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
