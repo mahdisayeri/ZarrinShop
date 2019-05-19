@@ -1,6 +1,6 @@
-# DigiShop
+# Zarrinshop
 
-Welcome to the DigiShop 
+Welcome to the ZarrinShop 
 
 ![slider image](https://github.com/mahdisayeri/DigiShop/blob/master/NScreenshot_20190413-090715_DigiShop.jpg) 
     ![slider image2](https://github.com/mahdisayeri/DigiShop/blob/master/NScreenshot_20190413-090719_DigiShop.jpg) 
