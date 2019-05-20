@@ -25,4 +25,6 @@
     <string name="sub_title">عنوان فرعی</string>
     <string name="AllList">لیست کامل</string>
     <string name="bestSellerTitle">محصولات پرفروش</string>
+    <string name="search_text">جستجو در زرین شاپ ...</string>
+    <string name="search">جستجو</string>
 </resources>

@@ -279,11 +279,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
        switch (item.getItemId()){
 
-           case R.id.toobar_menu_cart:
-               Toast.makeText(this, "cart", Toast.LENGTH_LONG).show();
-               break;
+//           case R.id.toobar_menu_cart:
+//               Toast.makeText(this, "cart", Toast.LENGTH_LONG).show();
+//               break;
            case R.id.toolbar_menu_search:
-               Toast.makeText(this, "search", Toast.LENGTH_LONG).show();
+               Intent search=new Intent(MainActivity.this,SearchActivity.class);
+               startActivity(search);
+             //  Toast.makeText(this, "search", Toast.LENGTH_LONG).show();
                break;
            default:
                break;
@@ -307,10 +309,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //               // startActivity(product);
 //               Toast.makeText(this, "ProductList", Toast.LENGTH_LONG).show();
 //                break;
-            case R.id.nav_basket:
-                product.putExtra("category","myBasket");
-                startActivity(product);
-                break;
+//            case R.id.nav_basket:
+//                product.putExtra("category","myBasket");
+//                startActivity(product);
+//                break;
             case R.id.nav_specialOffer:
                 product.putExtra("category","specialOffer");
                 startActivity(product);

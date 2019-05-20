@@ -105,12 +105,14 @@
     </LinearLayout>
 
     <TextView
+        android:gravity="center_horizontal"
         android:id="@+id/final_product_call"
-        android:background="@drawable/styleforwhitebackgrond"
+        android:background="@drawable/call_btn_style"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:textColor="@color/greenBackGround"
+        android:textColor="@color/witheText"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:text="تماس بگیرید"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

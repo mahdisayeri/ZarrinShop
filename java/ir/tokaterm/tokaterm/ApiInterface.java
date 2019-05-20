@@ -25,4 +25,7 @@ public interface ApiInterface {
 
     @POST("bestSellerList.php")
     Call<ProductArray> best_seller_listCall(@Query("category")String Category);
+
+    @POST("search.php")
+    Call<ProductArray> search_listCall(@Query("word")String Word);
 }
