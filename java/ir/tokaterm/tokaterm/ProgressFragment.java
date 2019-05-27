@@ -27,15 +27,12 @@ public class ProgressFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_progress, container, false);
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                getActivity().finish();
                 Intent main=new Intent(getContext(),MainActivity.class);
                 startActivity(main);
-
+                getActivity().finish();
             }
         },3000);
 
@@ -53,16 +50,13 @@ public class ProgressFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
 
-
-
             return null;
         }
 
 
         @Override
         protected void onPostExecute(String s) {
-            Intent main=new Intent(getContext(),MainActivity.class);
-            startActivity(main);
+
 
         }
     }

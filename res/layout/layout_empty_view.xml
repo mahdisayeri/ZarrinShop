@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center">
     <ImageView
-        android:src="@drawable/beautiful"
+        android:src="@drawable/a1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter" />

@@ -27,4 +27,5 @@
     <string name="bestSellerTitle">محصولات پرفروش</string>
     <string name="search_text">جستجو در زرین شاپ ...</string>
     <string name="search">جستجو</string>
+    <string name="progressDialog_title">Please wait</string>
 </resources>

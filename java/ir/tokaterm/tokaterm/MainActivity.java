@@ -1,6 +1,8 @@
 package ir.tokaterm.tokaterm;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,9 @@ import java.util.concurrent.TimeUnit;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import co.ronash.pushe.Pushe;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -64,13 +70,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<Product> data;
 
     private int slidNumber;
+    private ProgressDialog pd;
+    Intent splash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Pushe.initialize(this,true);
         apiInterface=Api.getApi().create(ApiInterface.class);
+
+
+        pd=new ProgressDialog(MainActivity.this,ProgressDialog.THEME_HOLO_DARK);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setTitle(R.string.progressDialog_title);
+        pd.setMessage("Connecting...");
+        pd.setCancelable(false);
+
+       splash=new Intent(MainActivity.this,SplashScrean.class);
+
+
 
 
         //START*************************COUNT DOWN TIMER********************
@@ -108,8 +127,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      sliderLayout=findViewById(R.id.imageSlider_sliderLayout);
      sliderLayout.setIndicatorAnimation(IndicatorAnimations.SWAP);
      sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
-     sliderLayout.setScrollTimeInSec(5);
+     sliderLayout.setScrollTimeInSec(4);
      setSliderViews();
+
 
     // END SLIDER
 
@@ -178,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void setSliderViews(){
+   public void setSliderViews(){
 
       for(int i=0;i<=3;i++){
           DefaultSliderView sliderView=new DefaultSliderView(this);
@@ -196,10 +216,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
               case 3:
                   sliderView.setImageUrl("https://www.digizargar.com/new/images/Economic.jpeg");
                   break;
-          }
+          } 
 
           sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-          slidNumber=i+1;
+         // slidNumber=i+1;
          // sliderView.setDescription("Jackdaws love my big sphinx of quartz." + (slidNumber));
 
           sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
@@ -222,10 +242,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void setDataWonderful(){
-
+       pd.show();
        Call<ProductArray> callProduct=apiInterface.wonderfulListCall("specialOffer");
-
        callProduct.enqueue(new Callback<ProductArray>() {
+
+
                                @Override
                                public void onResponse(Call<ProductArray> call, Response<ProductArray> response) {
 
@@ -234,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                    for(int i=0;i<data.size();i++){
                                        itemListwonder.add(new Data_Model_wonderful_list(data.get(i).getApiproduct_id(),data.get(i).getApiImageUrl(),
                                              data.get(i).getApiTitle(),data.get(i).getApiprice(),data.get(i).getApiOffPercentage()));
+                                             pd.dismiss();
 
 
                                    }
@@ -244,7 +266,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                @Override
                                public void onFailure(Call<ProductArray> call, Throwable t) {
-                                   Toast.makeText(MainActivity.this,"error", Toast.LENGTH_SHORT).show();
+                                   pd.dismiss();
+                                   startActivity(splash);
+                                   MainActivity.this.finish();
+                                  // Toast.makeText(MainActivity.this,"error", Toast.LENGTH_SHORT).show();
 
                                }
                            });
@@ -358,7 +383,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void setDataBestSeller(){
-
+         if(!pd.isShowing()){
+             pd.show();
+         }
         Call<ProductArray> callProduct=apiInterface.best_seller_listCall("sales_number");
 
         callProduct.enqueue(new Callback<ProductArray>() {
@@ -370,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 for(int i=0;i<data.size();i++){
                     itemListseller.add(new Data_Model_wonderful_list(data.get(i).getApiproduct_id(),data.get(i).getApiImageUrl(),
                             data.get(i).getApiTitle(),data.get(i).getApiprice(),data.get(i).getApiOffPercentage()));
-
+                    pd.dismiss();
                 }
 
                 bestSellerAdapter.notifyDataSetChanged();
@@ -378,6 +405,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onFailure(Call<ProductArray> call, Throwable t) {
+                pd.dismiss();
+                startActivity(splash);
+                MainActivity.this.finish();
                 Toast.makeText(MainActivity.this,"error", Toast.LENGTH_SHORT).show();
 
             }
